@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Title</title>
+    <link rel="stylesheet" href="/css/demo.css" type="text/css"/>
+    <link rel="stylesheet" href="/css/zTreeStyle/zTreeStyle.css" type="text/css"/>
+    <script src="/js/jquery-3.3.1.js"/>
+    <script src="/js/jquery.ztree.core.js"/>
+    <script>
+
+
+
+
+
+        $(document).ready(function(){
+//            function ajaxDataFilter(treeId, parentNode, responseData) {
+//                $.each(responseData, function (i, a) {
+//                    a.path += "_filter";
+//                })
+//
+//                return responseData;
+//            }
+            var setting1 = {
+                data: {
+                    key: {
+                        name: "path",
+                    },
+                    simpleData: {
+                        enable: true,
+                    }
+                },
+                async: {
+                    enable: true,
+                    url: "/getChildNodes",
+                    autoParam: ["id", "abpath"],
+                    otherParam:{"key1":1, "key2":2}
+//                    dataFilter: ajaxDataFilter
+
+                }
+            };
+//            var setting2 = {
+//                data: {
+//                    key: {
+//                        name: "path",
+//                    },
+//                    simpleData: {
+//                        enable: true,
+//                    }
+//                },
+//                async: {
+//                    enable: true,
+//                    url: "/getChildNodes",
+//                    autoParam: ["id"],
+//                    otherParam:{"key":2}
+////                    dataFilter: ajaxDataFilter
+//
+//                }
+//            };
+            init(setting1);
+//            init(setting1, setting2);
+            $("#b1").click(function () {
+                setting1.async.otherParam.key1 = $("#tree1").val();
+                setting1.async.otherParam.key2 = $("#tree2").val();
+//                setting2.async.otherParam.key = $("#tree2").val();
+//                debugger;
+                init(setting1);
+//                init(setting1, setting2);
+            });
+
+
+        });
+
+        function init(s1) {
+            $.fn.zTree.init($("#treeDemo"), s1);
+//            $.fn.zTree.init($("#treeDemo2"), s2);
+        }
+
+
+
+
+    </script>
+</head>
+<body>
+<div>
+    <ul id="treeDemo" class="ztree"></ul>
+    <!--<ul id="treeDemo2" class="ztree"></ul>-->
+    树1：<input id="tree1"/>
+    树2：<input id="tree2"/>
+    <button id="b1" type="button">比较</button>
+</div>
+</body>
+</html>
